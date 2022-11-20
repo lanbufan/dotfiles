@@ -1,0 +1,347 @@
+filetype plugin indent on
+set nocompatible
+filetype off
+set rtp+=C:\Users\cinep\.vim\bundle\Vundle.vim
+syntax on
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+" Plugin 'dciccale/guizoom.vim.git'
+Plugin 'drzel/vim-gui-zoom.vim'
+Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-fugitive'
+Plugin 'majutsushi/tagbar'
+Plugin 'https://github.com/ervandew/supertab.git'
+Plugin 'https://github.com/christoomey/vim-titlecase.git'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-syntastic/syntastic'
+"Bundle 'Valloric/YouCompleteMe'
+Plugin 'nvie/vim-flake8'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-surround'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'szw/vim-g.git'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'wahidrahim/resize-font'
+Plugin 'junegunn/goyo.vim.git'
+Plugin 'junegunn/limelight.vim.git'
+Plugin 'jpalardy/vim-slime.git'
+Plugin 'tomtom/tcomment_vim.git'
+Plugin 'ntpeters/vim-better-whitespace.git'
+Plugin 'mhinz/vim-startify.git'
+Plugin 'Yggdroot/indentLine.git'
+Plugin 'universal-ctags/ctags'
+Plugin 'ron89/thesaurus_query.vim'
+" https://github.com/ntpeters/vim-better-whitespace.git
+"Plugin 'nathanaelkane/vim-indent-guides.git'
+"Bundle 'christoomey/vim-quicklink'
+"Bundle 'mattn/webapi-vim'
+
+"https://github.com/tpope/vim-surround/issues/117
+"Plugin 'https://github.com/tpope/vim-surround.git'
+"Plugin 'vim-colorstepper/plugin/colorstepper.vim'
+call vundle#end()
+file
+
+" add following to turn on when start
+let g:better_whitespace_enabled = 0
+" turn on by default for all filetypes
+autocmd VimEnter * EnableWhitespace
+autocmd BufWritePre * StripWhitespace
+
+" abbrev. stuff
+iabbrev =l = []
+iabbrev =d = {}
+iabbrev for. pprint("{}".format())
+iabbrev forsl. pprint("{}".format(str(len())))
+iabbrev ipp from pprint import pprint
+iabbrev ipa import pandas as pd
+
+" go to line above and grab with ye
+nnoremap <localleader>u <esc>k^yej^f(lpli : <esc>
+
+" go to line above and grab with ye and fill all the parameters for .format print statement
+nnoremap <localleader>y <esc>k^yej^f(lpf(p
+" for str(len(
+nnoremap <localleader>t <esc>k^yej^f(lpf(f(f(p
+
+" go to line below and grab with ye and fill all the parameters for .format print statement
+nnoremap <localleader>dy <esc>j^yek^f.hp
+
+" go to line above and grab with ye
+iabbrev ln len()
+nnoremap <localleader>l <esc>k^yej^f(p
+
+" number a list of items
+" nnoremap <localleader>nl :'<,'>s/^\s*\zs/\=(line('.') - line("'<")+1).'. '"
+"
+" grab chunk that was just pasted
+nnoremap gp `[v`]
+
+set guifont=DejaVuSansMono\ Nerd\ Font:h16"
+
+" for python
+iabbrev dv_ dev_log = input()
+
+iabbrev for2. pprint("{}:{}".format(,))
+iabbrev pps pprint("")
+iabbrev ppp pprint("----------------------------------------------------------------------")
+iabbrev pfs pprint("============================================================================================== start")
+iabbrev pfe pprint("============================================================================================== end")
+iabbrev sp ############################################################################################
+iabbrev tl tuple(list(
+" true boolean
+iabbrev tb True
+" false boolean
+iabbrev fb False
+
+iabbrev jjr with open(".json", 'r') as j:
+iabbrev jjl     json.load(j)
+
+iabbrev fidx indx_main = [(i) for (i, value) in enumerate(l_id_ref_raw) if value == id_ref]
+iabbrev if__ if __name__ == "__main__":
+iabbrev if__pp if __name__ == "__main__": pprint('should not be ran directly')
+
+iabbrev pdr df_ = pd.read_csv(
+iabbrev pdt df_.to_csv( ,index=False)
+
+
+" bundle stuff
+" for vim-slime
+let g:slime_target = "vimterminal"
+
+let mapleader ="\<space>"
+let maplocalleader="\\"
+
+" localleader mappings
+nnoremap <localleader>D :redraw!<CR>
+
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+
+" .vimrc stuff
+nnoremap<space>v :vsp  $MYVIMRC<cr>
+
+" moving between tabs
+nnoremap tk :tabnext<cr>
+nnoremap tj :tabprev<cr>
+nnoremap th :tabfirst<cr>
+nnoremap tl :tablast<cr>
+
+nnoremap <localleader>q bi"<Esc>A"<Esc>
+
+" redraw!
+nnoremap <leader>m :redraw!<CR>
+
+"new tabe
+nnoremap <leader>tt :tabe<CR>
+
+" delete existing word between paranthese and paste new one
+nnoremap <leader>ff vwhp
+
+" move to next python definition
+" nnoremap <leader>d g*
+nnoremap <leader>d /def<CR>
+
+" add three-single quote for python-style commenting
+"nnoremap <localleader>q  O'''<ESC>}0i'''<ESC>{
+
+"break line in two : opposite of <shift> J
+nnoremap <F3> i<CR><Esc>
+
+" add one slash to python path
+" nnoremap <localleader><F1> f\\
+
+" terminal stuff
+nnoremap <space><space>t :terminal<cr>
+
+" grab "ye" on line below and copy-paste inside double-quote
+nnoremap <localleader>p1 j^yek^f(p
+
+" "#" search the function name on the line
+nnoremap <localleader><localleader>f ^lllll
+
+" ji=<esc>pi[<esc>p^p
+nnoremap <localleader><localleader>m ^yejppppppp
+
+" copy df
+nnoremap <space><space>[ F<space>lywepi[
+
+" get to =
+nnoremap <space>e f=#
+
+" l_valid_match = d_ror_match[''] --> fill inside '' with l_valid_match
+" noremap <space>q ^yef'p
+" nnoremap <localleader><localleader>l ^yt=f'p
+
+" large history command
+if &history < 1000
+  set history=1000
+endif
+
+set background=light
+color Chasing_Logic
+" color 256-grayvim
+let fortran_have_tabs=1
+set belloff=all
+set guicursor+=n:blinkon0
+set number relativenumber
+set nu rnu
+set numberwidth=5
+set textwidth=180
+set colorcolumn=+1
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set scrolloff=16
+set foldmethod=indent
+set foldlevel=99
+set encoding=utf-8
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set showcmd
+set winwidth=110
+set clipboard=unnamed
+set textwidth=0
+set wrapmargin=0
+set nospell
+command! W :w
+
+" disable built-in vim mapping
+"let g:BASH_Ctrl_j = 'off'
+"let g:BASH_Ctrl_j = 'off'
+
+" onoremap
+" onoremap <leader>a f=lv$
+" onoremap ef f=lv$
+" till 'period'
+onoremap p t.
+onoremap 2 t:
+"onoremap <space> t<space>
+
+noremap j gj
+noremap k gk
+
+
+nnoremap <leader><leader> :w<cr>
+nnoremap <space>sv :source $MYVIMRC<cr>
+
+nnoremap <space>z :vertical resize -20<cr>
+nnoremap <space>m :vertical resize -80<cr>
+nnoremap <space>x :vertical resize +20<cr>
+nnoremap <space>b :vertical resize +80<cr>
+
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <CR> : nohlsearch<cr>
+
+"nnoremap <on! CalculateAge()
+nnoremap <leader>\t :terminal<cr>
+
+" creating space between lines
+"for i in range(97,122)
+"  let c = nr2char(i)
+"  exec "map \e".c." <M-".c.">"
+"  exec "map! \e".c." <M-".c.">"
+"endfor
+
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+"˙∆˚¬^
+
+" selecting a block of text
+nnoremap <leader>g {v}
+
+" inoremap
+" backtab {sublime-esque}
+inoremap <S-Tab> <C-d>
+nnoremap <S-Tab> <C-d>
+
+nnoremap ! 30k
+nnoremap <S-z> 30j
+
+nnoremap <tab> ^
+
+"nnoremap <S><space> O<esc>
+
+" terminal remap
+tnoremap <leader>n <C-\><C-n>
+
+" visual remap stuff
+vnoremap <leader>w "*yy
+
+" performance execution
+set lazyredraw
+
+" text rendering option
+set linebreak
+"set backspace=indent, eol, start
+set backspace=indent,eol,start
+"set spell
+set bs=2
+
+" file management
+set confirm
+set noswapfile
+
+" au BufRead, BufNewFile *.py set expandtab
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+nnoremap <c-z> <nop>
+
+" space management stuff
+" create an empty line between current line and above
+nnoremap <S-space> O<esc>j
+
+" create an empty line between current line and below
+nnoremap z<space> o<esc>k
+
+" delete an empty line above current line
+nnoremap <C-space> k<esc>dd
+
+if exists('python_highlight_all')
+    unlet python_highlight_all
+endif
+if exists('python_space_error_highlight')
+    unlet python_space_error_highlight
+endif
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+    \ set textwidth=0
+    \ set wrapmargin=0
+    \ set nowrap
+
+if &term =~ '256color'
+    " Disable Background Color Erase (BCE) so that color schemes
+    " work properly when Vim is used inside tmux and GNU screen.
+    set t_ut=
+endif
+
+"  NERDTREE stuff
+" autocmd BufEnter NERD_tree_* nmap  d<CR> <CR> :NERDTreeToggle <CR>
+" autocmd BufLeave NERD_tree_* unmap d<CR>
+
+nmap <F6> :NERDTreeToggle<CR>
+nnoremap <leader>nr :NERDTree<CR>
+
