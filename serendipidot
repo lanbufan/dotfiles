@@ -1,0 +1,3 @@
+# set a early warning sign about too much indentation in function (refactor sigh)
+highlight ColorColumn ctermbg=237
+set colorcolumn=80
