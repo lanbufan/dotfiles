@@ -1,10 +1,15 @@
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Plugin 'gmarik/vundle'
-Plugin 'scrooloose/nerdtree.git'
+filetype on
+" filetype plugin on
+set rtp+=C:\Users\cinep\.vim\bundle\Vundle.vim
+syntax on
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+" Plugin 'dciccale/guizoom.vim.git'
+Plugin 'mechatroner/rainbow_csv'
+Plugin 'chrisbra/csv.vim'
+Plugin 'wojciechkepka/vim-github-dark'
+Plugin 'drzel/vim-gui-zoom.vim'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
@@ -29,6 +34,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'wahidrahim/resize-font'
 Plugin 'junegunn/goyo.vim.git'
 Plugin 'junegunn/limelight.vim.git'
+Plugin 'junegunn/fzf.vim'
 Plugin 'jpalardy/vim-slime.git'
 Plugin 'tomtom/tcomment_vim.git'
 Plugin 'ntpeters/vim-better-whitespace.git'
@@ -36,19 +42,17 @@ Plugin 'mhinz/vim-startify.git'
 Plugin 'Yggdroot/indentLine.git'
 Plugin 'universal-ctags/ctags'
 Plugin 'ron89/thesaurus_query.vim'
-Plugin 'stsewd/gx-extended.vim'
+Plugin 'plasticboy/vim-markdown.vim'
 " https://github.com/ntpeters/vim-better-whitespace.git
 "Plugin 'nathanaelkane/vim-indent-guides.git'
-""Bundle 'christoomey/vim-quicklink'
+"Bundle 'christoomey/vim-quicklink'
 "Bundle 'mattn/webapi-vim'
-"
-""https://github.com/tpope/vim-surround/issues/117
-"Plugin 'https://github.com/tpope/vim-surround.git'
-""Plugin 'vim-colorstepper/plugin/colorstepper.vim'
-filetype plugin indent on
 
-" call vundle#end()
-" file
+"https://github.com/tpope/vim-surround/issues/117
+"Plugin 'https://github.com/tpope/vim-surround.git'
+"Plugin 'vim-colorstepper/plugin/colorstepper.vim'
+call vundle#end()
+file
 
 " add following to turn on when start
 let g:better_whitespace_enabled = 0
@@ -67,14 +71,12 @@ iabbrev ipa import pandas as pd
 " go to line above and grab with ye
 nnoremap <localleader>u <esc>k^yej^f(lpli : <esc>
 
-" go to line above and grab with ye and fill all the parameters for .format
-" print statement
+" go to line above and grab with ye and fill all the parameters for .format print statement
 nnoremap <localleader>y <esc>k^yej^f(lpf(p
-" " for str(len(
+" for str(len(
 nnoremap <localleader>t <esc>k^yej^f(lpf(f(f(p
 
-" go to line below and grab with ye and fill all the parameters for .format
-" print statement
+" go to line below and grab with ye and fill all the parameters for .format print statement
 nnoremap <localleader>dy <esc>j^yek^f.hp
 
 " go to line above and grab with ye
@@ -82,8 +84,8 @@ iabbrev ln len()
 nnoremap <localleader>l <esc>k^yej^f(p
 
 " number a list of items
-" nnoremap <localleader>nl :'<,'>s/^\s*\zs/\=(line('.') - line("'<")+1).'.
-
+" nnoremap <localleader>nl :'<,'>s/^\s*\zs/\=(line('.') - line("'<")+1).'. '"
+"
 " grab chunk that was just pasted
 nnoremap gp `[v`]
 
@@ -94,18 +96,12 @@ iabbrev dv_ dev_log = input()
 
 iabbrev for2. pprint("{}:{}".format(,))
 iabbrev pps pprint("")
-iabbrev ppp
-pprint("----------------------------------------------------------------------")
-iabbrev pfs
-pprint("==============================================================================================
-start")
-iabbrev pfe
-pprint("==============================================================================================
-end")
-iabbrev sp
-############################################################################################
+iabbrev ppp pprint("----------------------------------------------------------------------")
+iabbrev pfs pprint("============================================================================================== start")
+iabbrev pfe pprint("============================================================================================== end")
+iabbrev sp ############################################################################################
 iabbrev tl tuple(list(
-" " true boolean
+" true boolean
 iabbrev tb True
 " false boolean
 iabbrev fb False
@@ -113,18 +109,15 @@ iabbrev fb False
 iabbrev jjr with open(".json", 'r') as j:
 iabbrev jjl     json.load(j)
 
-iabbrev fidx indx_main = [(i) for (i, value) in enumerate(l_id_ref_raw) if
-value == id_ref]
+iabbrev fidx indx_main = [(i) for (i, value) in enumerate(l_id_ref_raw) if value == id_ref]
 iabbrev if__ if __name__ == "__main__":
-iabbrev if__pp if __name__ == "__main__": pprint('should not be ran
-directly')
+iabbrev if__pp if __name__ == "__main__": pprint('should not be ran directly')
 
 iabbrev pdr df_ = pd.read_csv(
 iabbrev pdt df_.to_csv( ,index=False)
 
-
-" " bundle stuff
-" " for vim-slime
+" bundle stuff
+" for vim-slime
 let g:slime_target = "vimterminal"
 
 let mapleader ="\<space>"
@@ -134,18 +127,22 @@ let maplocalleader="\\"
 nnoremap <localleader>D :redraw!<CR>
 
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
-"
-" " .vimrc stuff
+
+" .vimrc stuff
 nnoremap<space>v :vsp  $MYVIMRC<cr>
 
+" Vim and Python Trick
+nnoremap<space>t :vsp  $COOL_TRICKS<cr>
+
+print(repr(text))  # Output shows special characters explicitly
+
 " moving between tabs
- nnoremap tk :tabnext<cr>
- nnoremap tj :tabprev<cr>
- nnoremap th :tabfirst<cr>
- nnoremap tl :tablast<cr>
+nnoremap tk :tabnext<cr>
+nnoremap tj :tabprev<cr>
+nnoremap th :tabfirst<cr>
+nnoremap tl :tablast<cr>
 
 nnoremap <localleader>q bi"<Esc>A"<Esc>
-" nnoremap <leader>l :q!
 
 " redraw!
 nnoremap <leader>m :redraw!<CR>
@@ -179,13 +176,13 @@ nnoremap <localleader>p1 j^yek^f(p
 nnoremap <localleader><localleader>f ^lllll
 
 " ji=<esc>pi[<esc>p^p
- nnoremap <localleader><localleader>m ^yejppppppp
+nnoremap <localleader><localleader>m ^yejppppppp
 
 " copy df
 nnoremap <space><space>[ F<space>lywepi[
 
 " get to =
- nnoremap <space>e f=#
+nnoremap <space>e f=#
 
 " l_valid_match = d_ror_match[''] --> fill inside '' with l_valid_match
 " noremap <space>q ^yef'p
@@ -199,6 +196,9 @@ endif
 set background=light
 color Chasing_Logic
 " color 256-grayvim
+" colorscheme ghdark
+" let g:gh_color = 'soft'
+
 let fortran_have_tabs=1
 set belloff=all
 set guicursor+=n:blinkon0
@@ -225,7 +225,8 @@ set clipboard=unnamed
 set textwidth=0
 set wrapmargin=0
 set nospell
-set nowrap
+set path+=**
+set termwinscroll=50000
 command! W :w
 
 " disable built-in vim mapping
@@ -345,9 +346,49 @@ au BufNewFile,BufRead *.py
     \ set nowrap
 
 if &term =~ '256color'
+    " Disable Background Color Erase (BCE) so that color schemes
+    " work properly when Vim is used inside tmux and GNU screen.
     set t_ut=
 endif
 
-" NERDTREE stuff
+"  NERDTREE stuff
+" autocmd BufEnter NERD_tree_* nmap  d<CR> <CR> :NERDTreeToggle <CR>
+" autocmd BufLeave NERD_tree_* unmap d<CR>
+
 nmap <F6> :NERDTreeToggle<CR>
 nnoremap <leader>nr :NERDTree<CR>
+
+function! LinePercent()
+    return line('.') * 100 / line('$') . '%'
+endfunction
+
+nnoremap <leader>nn :echo LinePercent()
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <leader>ww :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" highlight ColorColumn ctermbg=235
+highlight ColorColumn ctermbg=237
+set colorcolumn=80
+
+function! GoogleSearchSelectedText()
+    " Yank the highlighted text into the + register (system clipboard)
+    normal! "+y
+    " Escape the search string for the URL
+    let l:searchString = escape(@+, ' &?')
+    " Open the default web browser and perform a Google search
+    execute "!start https://www.google.com/search?q=" . l:searchString
+endfunction
+
+" Map the function to a key combination in normal and visual mode, for example, <Leader>g
+nnoremap <Leader>c :call GoogleSearchSelectedText()<CR>
+vnoremap <Leader>c :'<,'>call GoogleSearchSelectedText()<CR>
+
+augroup PythonFunctionCallHighlight
+  autocmd!
+  autocmd FileType python syntax match pythonFuncCall /\w\+\s*(/ containedin=pythonStatement,pythonExpr,pythonBlock
+  autocmd FileType python highlight pythonFuncCall ctermfg=Blue guifg=Blue
+augroup END
+" Match all caps
+" /\v<\u+>
+" /\v<\u{3,}>
